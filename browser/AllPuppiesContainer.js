@@ -8,15 +8,4 @@ const mapStateToProps = function(state, ownProps){
 	}
 }
 
-const mapDispatchToProps = function(dispatch, ownProps){
-	return {
-		getPuppies: function(){
-			dispatch(retrievePuppies());
-		}
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(AllPuppies);
+export default connect(mapStateToProps, null)(AllPuppies);

@@ -1,13 +1,16 @@
 'use strict';
 
 const express = require('express');
+var path = require('path');
 const volleyball = require('volleyball');
+var indexPath = path.join(__dirname, './index.html');
 
 const app = express();
 
 app.use(volleyball);
 
 app.use(express.static(__dirname));
+app.set('view engine', 'html')
 
 const puppies = [{
   id: 1,
@@ -39,6 +42,10 @@ app.get('/api/puppies/:id', function (req, res) {
   const aPuppy = puppies.find(p => p.id === Number(req.params.id));
   if (!aPuppy) res.status(404).end();
   else res.json(aPuppy);
+});
+
+app.get('/*', function (req, res) {
+    res.sendFile(indexPath);
 });
 
 app.listen(3000, function () {
